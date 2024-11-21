@@ -1,0 +1,67 @@
+<style>
+
+  * {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  body {
+    background: black;
+    color: white;
+  }
+  div {
+    display: flex;
+    /* border: 1px green dashed; */
+    height: 100vh;
+    width:  100vw;
+    justify-content: center;
+    align-items: center;
+  }
+  span {
+    /* border: 1px red dotted; */
+    font-family: sans-serif;
+    font-weight: bolder;
+    text-transform: uppercase;
+  }
+
+</style>
+
+<div>
+  <span contenteditable spellcheck="false">Insert text here...</span>
+</div>
+
+<script>
+
+  span = document.getElementsByTagName("span")[0];
+  //span.setAttribute("contenteditable", "true");
+
+  span.onblur = () => {
+    if (!document.fullscreenElement)
+      document.documentElement.requestFullscreen();
+  };
+  span.onfocus = () => {
+    if (document.fullscreenElement)
+      document.exitFullscreen();
+
+    var range = document.createRange();
+    range.selectNodeContents(span);
+
+    var selection=window.getSelection(); 
+    selection.removeAllRanges(); 
+    selection.addRange(range); 
+  };
+
+  function resize()
+  {
+    var scaleWidth = 0.8 * span.parentNode.clientWidth / span.clientWidth;
+    var scaleHeight = 0.8 * span.parentNode.clientHeight / span.clientHeight;
+    var scale = scaleWidth < scaleHeight ? scaleWidth : scaleHeight;
+    span.setAttribute("style", `transform: scale(${scale})`);
+  }
+
+  span.oninput = resize;
+  window.onload = resize;
+  window.onresize = resize;
+
+</script>
+
