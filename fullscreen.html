@@ -83,13 +83,15 @@
     {
       if (event.target.type.startsWith("landscape"))
       {
-        select()
+	span.blur();
+        //select()
         if (!document.fullscreenElement)
           document.documentElement.requestFullscreen();
       }
       else
       {
-        select(span);
+	span.focus();
+        //select(span);
         if (document.fullscreenElement)
           document.exitFullscreen();
       }
