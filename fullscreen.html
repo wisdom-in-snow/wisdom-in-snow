@@ -80,30 +80,21 @@
   if (screen && screen.orientation)
     screen.orientation.onchange = (event) =>
   {
-    span.textContent = screen.orientation.type;
+    if (screen.orientation.type.startsWith("landscape"))
+    {
+      span.blur();
+      select()
+      if (!document.fullscreenElement)
+        document.documentElement.requestFullscreen();
+    }
+    else
+    {
+      span.focus();
+      select(span);
+      if (document.fullscreenElement)
+        document.exitFullscreen();
+    }
   }
-  // if (screen.ScreenOrientation)
-  // {
-  //   screen.ScreenOrientation.onchange = (event) =>
-  //   {
-  //     if (event.target.type.startsWith("landscape"))
-  //     {
-  //       span.setAttribute("color", "blue");
-  //       // span.blur();
-  //       // select()
-  //       // if (!document.fullscreenElement)
-  //       //   document.documentElement.requestFullscreen();
-  //     }
-  //     else
-  //     {
-  //       span.setAttribute("color", "green");
-  //       // span.focus();
-  //       // select(span);
-  //       // if (document.fullscreenElement)
-  //       //   document.exitFullscreen();
-  //     }
-  //   };
-  // }
 
 </script>
 
