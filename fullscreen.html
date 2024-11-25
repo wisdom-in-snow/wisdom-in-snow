@@ -83,16 +83,16 @@
     if (screen.orientation.type.startsWith("landscape"))
     {
       span.blur();
-      select()
-      if (!document.fullscreenElement)
-        document.documentElement.requestFullscreen();
+      // select()
+      // if (!document.fullscreenElement)
+      //   document.documentElement.requestFullscreen();
     }
     else
     {
       span.focus();
-      select(span);
-      if (document.fullscreenElement)
-        document.exitFullscreen();
+      // select(span);
+      // if (document.fullscreenElement)
+      //   document.exitFullscreen();
     }
   }
 
