@@ -51,19 +51,20 @@
 
   span = document.getElementsByTagName("span")[0];
 
-  span.onblur = () => {
+  function fullscreen()
+  {
     setTimeout(() => {
       select();
       if (!document.fullscreenElement)
         document.documentElement.requestFullscreen();
     }, 100); 
-  };
-
-  span.onfocus = () => {
+  }  
+  function restore()
+  {
     select(span);
     if (document.fullscreenElement)
       document.exitFullscreen();
-  };
+  }
 
   function resize()
   {
@@ -73,27 +74,19 @@
     span.setAttribute("style", `transform: scale(${scale})`);
   }
 
+  span.onblur = fullscreen;
+  span.onfocus = restore;
   span.oninput = resize;
   window.onload = resize;
   window.onresize = resize;
 
   if (screen && screen.orientation)
-    screen.orientation.onchange = (event) =>
+    screen.orientation.onchange = () =>
   {
     if (screen.orientation.type.startsWith("landscape"))
-    {
-      span.blur();
-      // select()
-      // if (!document.fullscreenElement)
-      //   document.documentElement.requestFullscreen();
-    }
+      fullscreen();
     else
-    {
-      span.focus();
-      // select(span);
-      // if (document.fullscreenElement)
-      //   document.exitFullscreen();
-    }
+      restore();
   }
 
 </script>
