@@ -35,17 +35,12 @@
   function select(element = null)
   {
     var selection=window.getSelection(); 
-    selection.removeAllRanges(); 
+    selection?.removeAllRanges(); 
     if (element)
     {
       var range = document.createRange();
       range.selectNodeContents(element);
-      selection.addRange(range); 
-    }
-    else
-    {
-      if (document.selection)
-        document.selection.empty();
+      selection?.addRange(range); 
     }
   }
 
