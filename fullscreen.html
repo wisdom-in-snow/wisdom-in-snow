@@ -1,5 +1,4 @@
 <style>
-
   * {
     margin: 0;
     padding: 0;
@@ -18,9 +17,10 @@
     align-items: center;
   }
   span {
-    /* border: 1px red dotted; */
     font-family: sans-serif;
-    font-weight: bolder;
+    font-size: xx-large;
+    font-weight: bold;
+    font-style: normal;
     text-transform: uppercase;
   }
 
@@ -83,17 +83,19 @@
     {
       if (event.target.type.startsWith("landscape"))
       {
-	span.blur();
-        //select()
-        if (!document.fullscreenElement)
-          document.documentElement.requestFullscreen();
+        span.setAttribute("color", "blue");
+        // span.blur();
+        // select()
+        // if (!document.fullscreenElement)
+        //   document.documentElement.requestFullscreen();
       }
       else
       {
-	span.focus();
-        //select(span);
-        if (document.fullscreenElement)
-          document.exitFullscreen();
+        span.setAttribute("color");
+        // span.focus();
+        // select(span);
+        // if (document.fullscreenElement)
+        //   document.exitFullscreen();
       }
     };
   }
