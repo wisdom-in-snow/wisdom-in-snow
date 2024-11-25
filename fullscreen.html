@@ -77,28 +77,33 @@
   window.onload = resize;
   window.onresize = resize;
 
-  if (screen.ScreenOrientation)
+  if (screen && screen.orientation)
+    window.screen.orientation.onchange = (event) =>
   {
-    screen.ScreenOrientation.onchange = (event) =>
-    {
-      if (event.target.type.startsWith("landscape"))
-      {
-        span.setAttribute("color", "blue");
-        // span.blur();
-        // select()
-        // if (!document.fullscreenElement)
-        //   document.documentElement.requestFullscreen();
-      }
-      else
-      {
-        span.setAttribute("color", "green");
-        // span.focus();
-        // select(span);
-        // if (document.fullscreenElement)
-        //   document.exitFullscreen();
-      }
-    };
+    span.textContent = screen.orientation.type;
   }
+  // if (screen.ScreenOrientation)
+  // {
+  //   screen.ScreenOrientation.onchange = (event) =>
+  //   {
+  //     if (event.target.type.startsWith("landscape"))
+  //     {
+  //       span.setAttribute("color", "blue");
+  //       // span.blur();
+  //       // select()
+  //       // if (!document.fullscreenElement)
+  //       //   document.documentElement.requestFullscreen();
+  //     }
+  //     else
+  //     {
+  //       span.setAttribute("color", "green");
+  //       // span.focus();
+  //       // select(span);
+  //       // if (document.fullscreenElement)
+  //       //   document.exitFullscreen();
+  //     }
+  //   };
+  // }
 
 </script>
 
