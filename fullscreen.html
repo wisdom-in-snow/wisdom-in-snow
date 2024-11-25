@@ -78,7 +78,7 @@
   window.onresize = resize;
 
   if (screen && screen.orientation)
-    window.screen.orientation.onchange = (event) =>
+    screen.orientation.onchange = (event) =>
   {
     span.textContent = screen.orientation.type;
   }
