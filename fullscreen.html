@@ -32,23 +32,37 @@
 
 <script>
 
-  span = document.getElementsByTagName("span")[0];
-  //span.setAttribute("contenteditable", "true");
-
-  span.onblur = () => {
-    if (!document.fullscreenElement)
-      document.documentElement.requestFullscreen();
-  };
-  span.onfocus = () => {
-    if (document.fullscreenElement)
-      document.exitFullscreen();
-
-    var range = document.createRange();
-    range.selectNodeContents(span);
-
+  function select(element = null)
+  {
     var selection=window.getSelection(); 
     selection.removeAllRanges(); 
-    selection.addRange(range); 
+    if (element)
+    {
+      var range = document.createRange();
+      range.selectNodeContents(element);
+      selection.addRange(range); 
+    }
+    else
+    {
+      if (document.selection)
+        document.selection.empty();
+    }
+  }
+
+  span = document.getElementsByTagName("span")[0];
+
+  span.onblur = () => {
+    setTimeout(() => {
+      select();
+      if (!document.fullscreenElement)
+        document.documentElement.requestFullscreen();
+    }, 100); 
+  };
+
+  span.onfocus = () => {
+    select(span);
+    if (document.fullscreenElement)
+      document.exitFullscreen();
   };
 
   function resize()
@@ -62,6 +76,25 @@
   span.oninput = resize;
   window.onload = resize;
   window.onresize = resize;
+
+  if (screen.ScreenOrientation)
+  {
+    screen.ScreenOrientation.onchange = (event) =>
+    {
+      if (event.target.type.startsWith("landscape"))
+      {
+        select()
+        if (!document.fullscreenElement)
+          document.documentElement.requestFullscreen();
+      }
+      else
+      {
+        select(span);
+        if (document.fullscreenElement)
+          document.exitFullscreen();
+      }
+    };
+  }
 
 </script>
 
